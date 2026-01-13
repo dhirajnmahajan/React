@@ -4,7 +4,7 @@ import Card from "./card";
 import { useNavigate } from "react-router";
 
 export default function List() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [searchItem, setSearchItem] = useState("");
   const [data, setData] = useState([]);
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -12,16 +12,16 @@ export default function List() {
   const [maxPrice, setMaxPrice] = useState("");
   const [debouncedMin, setDebouncedMin] = useState("");
   const [debouncedMax, setDebouncedMax] = useState("");
-  const savedData = localStorage.getItem('productsData');
+  const savedData = localStorage.getItem("productsData");
 
   const handleEdit = (index) => {
     localStorage.setItem("activeEditIndex", index);
-    navigate('/create')
+    navigate("/create");
   };
 
   const handleDelete = (index) => {
     const updated = data.filter((_, i) => i !== index);
-    localStorage.setItem('productsData', JSON.stringify(updated));
+    localStorage.setItem("productsData", JSON.stringify(updated));
     setData(updated);
   };
 
@@ -58,11 +58,11 @@ export default function List() {
   });
 
   useEffect(() => {
-    if(savedData){
-        const updatedData = JSON.parse(savedData);
-        setData(updatedData);
+    if (savedData) {
+      const updatedData = JSON.parse(savedData);
+      setData(updatedData);
     }
-  }, [savedData])
+  }, [savedData]);
 
   return (
     <>

@@ -12,7 +12,7 @@ function Form() {
   };
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialObj);
-  
+
   const savedData = localStorage.getItem("productsData");
   const activeEditIndex = localStorage.getItem("activeEditIndex");
 
@@ -111,7 +111,7 @@ function Form() {
               name="image"
               onChange={async (e) => {
                 const fileUrl = await convertToBase64(e.target.files[0]);
-                setFormData({...formData, image: fileUrl});
+                setFormData({ ...formData, image: fileUrl });
               }}
               className="mt-2"
             />

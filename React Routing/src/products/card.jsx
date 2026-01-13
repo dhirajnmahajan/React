@@ -3,11 +3,8 @@ import React from "react";
 function Card({ item, handleDelete, handleEdit }) {
   return (
     <div className="max-w-sm bg-white rounded-lg shadow overflow-hidden m-2">
-    <img
-        src={item.image}
-        alt="card"
-        className="w-full h-50 object-cover"
-      />
+      <img src={item.image} alt="card" className="w-full h-50 object-cover" />
+
       <div className="p-4">
         <h2 className="text-lg font-semibold">Product: {item.pname}</h2>
         <p className="text-gray-600">Price : {item.price}</p>
