@@ -12,6 +12,7 @@ export default function List() {
   const [maxPrice, setMaxPrice] = useState("");
   const [debouncedMin, setDebouncedMin] = useState("");
   const [debouncedMax, setDebouncedMax] = useState("");
+
   const savedData = localStorage.getItem("productsData");
 
   const handleEdit = (index) => {

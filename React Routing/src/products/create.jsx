@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import List from "./list";
 import Card from "./card";
 import { useNavigate } from "react-router";
+import convertImage from './convertImage'
 // import {useDebounce} from 'use-debounce'
 
 function Form() {
@@ -16,16 +17,7 @@ function Form() {
   const savedData = localStorage.getItem("productsData");
   const activeEditIndex = localStorage.getItem("activeEditIndex");
 
-  const convertToBase64 = (file) => {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onerror = () => {
-        console.error("FileReader error:", reader.error);
-      };
-      reader.onload = () => resolve(reader.result);
-    });
-  };
+
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -41,6 +33,7 @@ function Form() {
 
     if (activeEditIndex !== null) {
       const productsData = JSON.parse(savedData) || [];
+
       const updatedData = productsData.map((item, index) => {
         if (Number(activeEditIndex) === index) {
           return formData;
@@ -48,9 +41,11 @@ function Form() {
           return item;
         }
       });
+
       const stringifyData = JSON.stringify(updatedData);
       localStorage.setItem("productsData", stringifyData);
       localStorage.removeItem("activeEditIndex");
+
       navigate("/", { replace: true });
     } else {
       const productsData =
@@ -109,11 +104,11 @@ function Form() {
             <input
               type="file"
               name="image"
+              className="mt-2"
               onChange={async (e) => {
-                const fileUrl = await convertToBase64(e.target.files[0]);
+                const fileUrl = await convertImage(e.target.files[0]);
                 setFormData({ ...formData, image: fileUrl });
               }}
-              className="mt-2"
             />
           </label>
 
