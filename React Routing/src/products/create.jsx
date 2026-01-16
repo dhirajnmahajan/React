@@ -14,8 +14,8 @@ function Form() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialObj);
 
-  const savedData = localStorage.getItem("productsData");
-  const activeEditIndex = localStorage.getItem("activeEditIndex");
+  const savedData = sessionStorage.getItem("productsData");
+  const activeEditIndex = sessionStorage.getItem("activeEditIndex");
 
 
 
@@ -43,16 +43,16 @@ function Form() {
       });
 
       const stringifyData = JSON.stringify(updatedData);
-      localStorage.setItem("productsData", stringifyData);
-      localStorage.removeItem("activeEditIndex");
+      sessionStorage.setItem("productsData", stringifyData);
+      sessionStorage.removeItem("activeEditIndex");
 
       navigate("/", { replace: true });
     } else {
       const productsData =
-        JSON.parse(localStorage.getItem("productsData")) || [];
+        JSON.parse(sessionStorage.getItem("productsData")) || [];
       const updatedData = [...productsData, formData];
       const stringifyData = JSON.stringify(updatedData);
-      localStorage.setItem("productsData", stringifyData);
+      sessionStorage.setItem("productsData", stringifyData);
     }
     setFormData(initialObj);
   };
@@ -107,7 +107,7 @@ function Form() {
               className="mt-2"
               onChange={async (e) => {
                 const fileUrl = await convertImage(e.target.files[0]);
-                setFormData({ ...formData, image: fileUrl });
+                setFormData((prev) => ({ ...prev, image: fileUrl }));
               }}
             />
           </label>

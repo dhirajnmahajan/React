@@ -13,16 +13,16 @@ export default function List() {
   const [debouncedMin, setDebouncedMin] = useState("");
   const [debouncedMax, setDebouncedMax] = useState("");
 
-  const savedData = localStorage.getItem("productsData");
+  const savedData = sessionStorage.getItem("productsData");
 
   const handleEdit = (index) => {
-    localStorage.setItem("activeEditIndex", index);
+    sessionStorage.setItem("activeEditIndex", index);
     navigate("/create");
   };
 
   const handleDelete = (index) => {
     const updated = data.filter((_, i) => i !== index);
-    localStorage.setItem("productsData", JSON.stringify(updated));
+    sessionStorage.setItem("productsData", JSON.stringify(updated));
     setData(updated);
   };
 
